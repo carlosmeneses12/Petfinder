@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 100), // Añadir espacio para centrar verticalmente
-                    // Header with App name and space for logo
+                    // header con nombre de la app y espacio para el logo
                     Text(
                       'Petfinder',
                       style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blueAccent),
@@ -62,10 +62,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     Container(
                       width: 100,
                       height: 100,
-                      child: Image.asset('assets/images/pet_logo.png'), // Añadir tu imagen de logo aquí
+                      child: Image.asset('assets/images/pet_logo.png'), // Añadir imagen de logo aquí
                     ),
                     SizedBox(height: 40),
-                    // Email field
+                    // espacio para el formulario de inicio de sesión
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
@@ -76,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: _validateEmail,
                     ),
                     SizedBox(height: 20),
-                    // Password field
+                    // contraseña espacio
                     TextFormField(
                       controller: _passwordController,
                       obscureText: true,
@@ -88,20 +88,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       validator: _validatePassword,
                     ),
                     SizedBox(height: 20),
-                    // Login button
+                    // boton de inicio de sesión
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          // Handle login action
+                          // accion de inicio de sesión
                         }
                       },
                       child: Text('Iniciar Sesión'),
                     ),
                     SizedBox(height: 20),
-                    // Google Sign In button
+                    // Google Sign boton
                     ElevatedButton.icon(
                       onPressed: () {
-                        // Handle Google Sign In
+                        // accion de inicio de sesión con Google
                       },
                       icon: Image.asset('assets/images/google_logo.png', height: 24), // Añadir tu imagen de Google logo aquí
                       label: Text('Iniciar Sesión con Google'),
@@ -111,7 +111,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    // Register link
+                    // Link para registrarse
                     TextButton(
                       onPressed: () {
                         Navigator.push(
@@ -121,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                       child: Text("¿No tienes cuenta? Regístrate aquí"),
                     ),
-                    // Forgot password link
+                    // olvidaste tu contraseña link
                     TextButton(
                       onPressed: () {
                         Navigator.push(

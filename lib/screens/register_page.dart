@@ -57,7 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 100), // Añadir espacio para centrar verticalmente
-                    // Header with App name and space for logo
+                    // header con nombre de la app y espacio para el logo
                     Text(
                       'Petfinder',
                       style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blueAccent),
@@ -71,7 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     Container(
                       width: 100,
                       height: 100,
-                      child: Image.asset('assets/images/pet_logo.png'), // Añadir tu imagen de logo aquí
+                      child: Image.asset('assets/images/pet_logo.png'), // añadir imagen de logo aquí
                     ),
                     SizedBox(height: 40),
                     // Email field
@@ -97,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       validator: _validatePassword,
                     ),
                     SizedBox(height: 20),
-                    // Confirm Password field
+                    // Confirm Password 
                     TextFormField(
                       controller: _confirmPasswordController,
                       obscureText: true,
@@ -113,16 +113,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          // Handle registration action
+                          // accion de registro
                         }
                       },
                       child: Text('Registrarse'),
                     ),
                     SizedBox(height: 20),
-                    // Google Sign In button
+                    // boton de registro con Google
                     ElevatedButton.icon(
                       onPressed: () {
-                        // Handle Google Sign In
+                        // accion de registro con Google
                       },
                       icon: Image.asset('assets/images/google_logo.png', height: 24), // Añadir tu imagen de Google logo aquí
                       label: Text('Registrarse con Google'),

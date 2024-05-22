@@ -31,7 +31,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: 100), // Añadir espacio para centrar verticalmente
-                    // Header with App name and space for logo
+                    // Header nombre de la app, espacio para el logo
                     Text(
                       'Petfinder',
                       style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.blueAccent),
@@ -45,10 +45,10 @@ class ForgotPasswordScreen extends StatelessWidget {
                     Container(
                       width: 100,
                       height: 100,
-                      child: Image.asset('assets/images/pet_logo.png'), // Añadir tu imagen de logo aquí
+                      child: Image.asset('assets/images/pet_logo.png'), // Añadir imagen de logo aquí
                     ),
                     SizedBox(height: 40),
-                    // Email field
+                    // Email espacio
                     TextFormField(
                       controller: _emailController,
                       decoration: InputDecoration(
@@ -59,11 +59,11 @@ class ForgotPasswordScreen extends StatelessWidget {
                       validator: _validateEmail,
                     ),
                     SizedBox(height: 20),
-                    // Submit button
+                    // boton de enviar enlace de recuperación
                     ElevatedButton(
                       onPressed: () {
                         if (Form.of(context).validate()) {
-                          // Handle forgot password action
+                          // Enviar enlace de recuperación
                         }
                       },
                       child: Text('Enviar enlace de recuperación'),
