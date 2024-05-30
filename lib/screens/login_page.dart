@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'register_page.dart';
 import 'forgot_password_page.dart';
-import 'MapMain.dart';
+import 'map_main.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -48,7 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
         // Redirigir a la pantalla principal
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => MapMain()),
+          MaterialPageRoute(builder: (context) => const MapMain()),
         );
       } on FirebaseAuthException catch (e) {
         String message;
@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Ha ocurrido un error. Por favor, inténtalo de nuevo.')),
+          const SnackBar(content: Text('Ha ocurrido un error. Por favor, inténtalo de nuevo.')),
         );
       }
     }
@@ -150,7 +150,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => RegisterScreen()),
+                              MaterialPageRoute(builder: (context) => const RegisterScreen()),
                             );
                           },
                           child: const Text("¿No tienes cuenta? Regístrate aquí"),

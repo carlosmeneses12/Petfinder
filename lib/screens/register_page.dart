@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -17,6 +18,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final AuthService _authService = AuthService();
 
   String? _validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -54,10 +56,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           password: _passwordController.text,
         );
 
-        // Enviar correo de verificación
         await userCredential.user!.sendEmailVerification();
 
-        // Añadir usuario a Firestore
         await _firestore.collection('users').doc(userCredential.user!.uid).set({
           'email': _emailController.text,
           'createdAt': Timestamp.now(),
@@ -67,7 +67,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           const SnackBar(content: Text('Registro exitoso. Por favor revisa tu correo para verificar tu cuenta.')),
         );
 
-        // Navegar a la pantalla de inicio de sesión o pantalla principal después del registro
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
         String message;
@@ -85,18 +84,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
         );
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Ha ocurrido un error. Por favor, inténtalo de nuevo.')),
+          const SnackBar(content: Text('Ha ocurrido un error. Por favor, inténtalo de nuevo.')),
         );
       }
+    }
+  }
+
+  Future<void> _registerWithGoogle() async {
+    User? user = await _authService.signInWithGoogle();
+    if (user != null) {
+      await _firestore.collection('users').doc(user.uid).set({
+        'email': user.email,
+        'createdAt': Timestamp.now(),
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Registro exitoso con Google.')),
+      );
+
+      Navigator.pop(context);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Ha ocurrido un error con Google Sign-In.')),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Registrarse'),
-      ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -167,6 +183,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ElevatedButton(
                           onPressed: _register,
                           child: const Text('Registrarse'),
+                        ),
+                        const SizedBox(height: 16),
+                        ElevatedButton.icon(
+                          icon: const Icon(Icons.login),
+                          label: const Text('Registrarse con Google'),
+                          onPressed: _registerWithGoogle,
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(double.infinity, 50),
+                          ),
                         ),
                       ],
                     ),
